@@ -1,0 +1,691 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Marketing Workshop</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f9fbfd;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    nav a {
+      color: #0077ff;
+      text-decoration: none;
+      margin: 0 1.2rem;
+      font-weight: 600;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 2px;
+      background: #0077ff;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: right;
+    }
+
+    nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+    main {
+      padding-top: 80px;
+      min-height: 100vh;
+      transition: opacity 0.5s ease;
+    }
+
+    section {
+      padding: 100px 10%;
+      text-align: center;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      color: #0077ff;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: "";
+      width: 70px;
+      height: 4px;
+      background: #0077ff;
+      display: block;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    #hero {
+      height: calc(100vh - 80px);
+      background: linear-gradient(120deg, #0077ff, #00c6ff);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    #hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+    #hero p { font-size: 1.3rem; margin-bottom: 1.5rem; }
+    #hero a {
+      background: white;
+      color: #0077ff;
+      padding: 0.9rem 1.8rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+    #hero a:hover { background: #e6e6e6; transform: translateY(-3px); }
+
+    img {
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      max-width: 80%;
+      margin-top: 40px;
+    }
+
+    ul { list-style: none; padding: 0; max-width: 700px; margin: 0 auto; text-align: left; }
+    li {
+      background: white;
+      margin: 15px 0;
+      padding: 20px;
+      border-radius: 15px;
+      font-size: 1.1rem;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    li:hover { transform: translateY(-5px); }
+
+    .team-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .member {
+      background: white;
+      border-radius: 20px;
+      width: 230px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+    .member:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
+    .member img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; }
+    .member h3 { color: #0077ff; margin-bottom: 5px; }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #0077ff;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      #hero h1 { font-size: 2.2rem; }
+      section { padding: 80px 5%; }
+      .member { width: 90%; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="/" data-link>Home</a>
+      <a href="/about" data-link>About</a>
+      <a href="/topics" data-link>Topics</a>
+      <a href="/team" data-link>Team</a>
+      <a href="/contact" data-link>Contact</a>
+    </nav>
+  </header>
+
+  <main id="app"></main>
+
+  <footer>
+    <p>© 2025 Digital Marketing Workshop. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // --- Page Templates ---
+    const routes = {
+      "/": `
+        <section id="hero">
+          <h1>Digital Marketing Workshop</h1>
+          <p>Empowering Brands in the Digital Age</p>
+          <a href="/about" data-link>Get Started</a>
+        </section>
+      `,
+      "/about": `
+        <section id="about">
+          <h2 class="section-title">About Us</h2>
+          <p>
+            Join our Digital Marketing Workshop and master the latest strategies in SEO, social media,
+            content creation, and data-driven campaigns. Perfect for beginners and professionals.
+          </p>
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7" alt="Digital Marketing Workshop">
+        </section>
+      `,
+      "/topics": `
+        <section id="topics">
+          <h2 class="section-title">Workshop Topics</h2>
+          <ul>
+            <li><strong>SEO Optimization:</strong> Rank higher on Google using proven strategies.</li>
+            <li><strong>Social Media Marketing:</strong> Build engagement across major platforms.</li>
+            <li><strong>Content Creation:</strong> Design visuals and copy that drive results.</li>
+            <li><strong>Analytics & Ads:</strong> Understand data and run effective ad campaigns.</li>
+          </ul>
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d" alt="Marketing Strategy">
+        </section>
+      `,
+      "/team": `
+        <section id="team">
+          <h2 class="section-title">Meet Our Team</h2>
+          <div class="team-container">
+            <div class="member">
+              <img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Parth Mistri">
+              <h3>Parth Mistri</h3>
+              <p>Frontend Developer</p>
+            </div>
+            <div class="member">
+              <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Riya Patel">
+              <h3>Riya Patel</h3>
+              <p>SEO Specialist</p>
+            </div>
+            <div class="member">
+              <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Arjun Mehta">
+              <h3>Arjun Mehta</h3>
+              <p>Marketing Strategist</p>
+            </div>
+          </div>
+        </section>
+      `,
+      "/contact": `
+        <section id="contact" style="background:linear-gradient(135deg,#0077ff,#00c6ff);color:white;">
+          <h2 class="section-title" style="color:white;">Contact Us</h2>
+          <p>Email: <strong>digitalworkshop@example.com</strong></p>
+          <p>Instagram: <a href="#" style="color:white;text-decoration:underline;">@dmworkshop</a></p>
+        </section>
+      `
+    };
+
+    // --- Router Functionality ---
+    const navigateTo = url => {
+      history.pushState(null, null, url);
+      router();
+    };
+
+    const router = () => {
+      const path = location.pathname;
+      const content = routes[path] || routes["/"];
+      const app = document.getElementById("app");
+      app.style.opacity = 0;
+      setTimeout(() => {
+        app.innerHTML = content;
+        app.style.opacity = 1;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 300);
+    };
+
+    window.addEventListener("popstate", router);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.addEventListener("click", e => {
+        if (e.target.matches("[data-link]")) {
+          e.preventDefault();
+          navigateTo(e.target.getAttribute("href"));
+        }
+      });
+      router();
+    });
+  </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Marketing Workshop</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f9fbfd;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    nav a {
+      color: #0077ff;
+      text-decoration: none;
+      margin: 0 1.2rem;
+      font-weight: 600;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 2px;
+      background: #0077ff;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: right;
+    }
+
+    nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+    main {
+      padding-top: 80px;
+      min-height: 100vh;
+      transition: opacity 0.5s ease;
+    }
+
+    section {
+      padding: 100px 10%;
+      text-align: center;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      font-size: 2.3rem;
+      color: #0077ff;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: "";
+      width: 70px;
+      height: 4px;
+      background: #0077ff;
+      display: block;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    #hero {
+      height: calc(100vh - 80px);
+      background: linear-gradient(120deg, #0077ff, #00c6ff);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+    #hero p { font-size: 1.3rem; margin-bottom: 2rem; }
+    #hero .btns a {
+      background: white;
+      color: #0077ff;
+      padding: 0.9rem 1.8rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      margin: 0 10px;
+    }+--
+    #hero a:hover { background: #e6e6e6; transform: translateY(-3px); }
+
+    img {
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      max-width: 85%;
+      margin-top: 40px;
+    }
+
+    ul { list-style: none; padding: 0; max-width: 700px; margin: 0 auto; text-align: left; }
+    li {
+      background: white;
+      margin: 15px 0;
+      padding: 20px;
+      border-radius: 15px;
+      font-size: 1.1rem;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    li:hover { transform: translateY(-5px); }
+
+    .team-container {  ////
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .member {
+      background: white;
+      border-radius: 20px;
+      width: 230px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+    .member:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
+    .member img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; }
+    .member h3 { color: #0077ff; margin-bottom: 5px; }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .stat {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      width: 200px;
+    }
+    .stat h3 { font-size: 2rem; color: #0077ff; }
+    .stat p { font-weight: 600; }
+
+    .testimonials {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 40px;
+    }
+    .testimonial {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      padding: 25px;
+      max-width: 300px;
+      font-style: italic;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    input, textarea {
+      padding: 10px 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #0077ff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover { background: #005ecb; }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #0077ff;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      #hero h1 { font-size: 2.2rem; }
+      section { padding: 80px 5%; }
+      .member { width: 90%; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="/" data-link>Home</a>
+      <a href="/about" data-link>About</a>
+      <a href="/topics" data-link>Topics</a>
+      <a href="/team" data-link>Team</a>
+      <a href="/contact" data-link>Contact</a>
+    </nav>
+  </header>
+
+  <main id="app"></main>
+
+  <footer>
+    <p>© 2025 Digital Marketing Workshop. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // --------------------- Page Templates ---------------------
+    const routes = {
+      "/": `
+        <section id="hero">
+          <h1>Digital Marketing Workshop</h1>
+          <p>Empowering Brands in the Digital Age</p>
+          <div class="btns">
+            <a href="/about" data-link>Get Started</a>
+            <a href="/contact" data-link>Join Now</a>
+          </div>
+        </section>
+
+        <section id="stats">
+          <h2 class="section-title">Our Impact</h2>
+          <div class="stats">
+            <div class="stat"><h3 class="count" data-target="500">0</h3><p>Students Trained</p></div>
+            <div class="stat"><h3 class="count" data-target="120">0</h3><p>Workshops Hosted</p></div>
+            <div class="stat"><h3 class="count" data-target="95">0</h3><p>% Satisfaction</p></div>
+          </div>
+        </section>
+      `,
+      "/about": `
+        <section id="about">
+          <h2 class="section-title">About Us</h2>
+          <p>
+            Our Digital Marketing Workshop helps entrepreneurs, students, and professionals 
+            learn hands-on digital marketing skills. We cover SEO, content, analytics, 
+            and ad management using real-world tools.
+          </p>
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7" alt="Workshop Image">
+          <div class="testimonials">
+            <div class="testimonial">"This workshop changed my career direction!" – Rina S.</div>
+            <div class="testimonial">"The instructors were so knowledgeable!" – David M.</div>
+            <div class="testimonial">"Loved the live project work and team discussions!" – Priya K.</div>
+          </div>
+        </section>
+      `,
+      "/topics": `
+        <section id="topics">
+          <h2 class="section-title">Workshop Topics</h2>
+          <ul>
+            <li><strong>SEO Optimization:</strong> Improve visibility with on-page and off-page strategies.</li>
+            <li><strong>Social Media Marketing:</strong> Grow organic reach and boost brand awareness.</li>
+            <li><strong>Content Creation:</strong> Build persuasive stories and design impactful visuals.</li>
+            <li><strong>Google Analytics:</strong> Learn to track and interpret user data effectively.</li>
+            <li><strong>Paid Advertising:</strong> Manage campaigns on Google Ads and Meta platforms.</li>
+          </ul>
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d" alt="Marketing Strategy">
+        </section>
+
+        <section id="faq">
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <ul>
+            <li><strong>Who can join?</strong> Anyone interested in marketing, entrepreneurship, or branding.</li>
+            <li><strong>Do I need prior experience?</strong> Not at all — we start from the basics.</li>
+            <li><strong>Is it online or in-person?</strong> Both options are available!</li>
+          </ul>
+        </section>
+      `,
+      "/team": `
+        <section id="team">
+          <h2 class="section-title">Meet Our Team</h2>
+          <div class="team-container">
+            <div class="member">
+              <img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Parth Mistri">
+              <h3>Parth Mistri</h3><p>Frontend Developer</p>
+            </div>
+            <div class="member">
+              <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Riya Patel">
+              <h3>Riya Patel</h3><p>SEO Specialist</p>
+            </div>
+            <div class="member">
+              <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Arjun Mehta">
+              <h3>Arjun Mehta</h3><p>Marketing Strategist</p>
+            </div>
+            <div class="member">
+              <img src="https://randomuser.me/api/portraits/men/88.jpg" alt="Samir Joshi">
+              <h3>Samir Joshi</h3><p>Ad Campaign Manager</p>
+            </div>
+          </div>
+        </section>
+      `,
+      "/contact": `
+        <section id="contact" style="background:linear-gradient(135deg,#0077ff,#00c6ff);color:white;">
+          <h2 class="section-title" style="color:white;">Contact Us</h2>
+          <p>Have questions or want to register? Reach out below!</p>
+          <form onsubmit="event.preventDefault(); alert('Message Sent!');">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="4" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+          <p style="margin-top:20px;">Follow us on 
+            <a href="#" style="color:white;text-decoration:underline;">@dmworkshop</a>
+          </p>
+        </section>
+      `
+    };
+
+    // --------------------- Router Logic ---------------------
+    const navigateTo = url => {
+      history.pushState(null, null, url);
+      router();
+    };
+
+    const router = () => {
+      const path = location.pathname;
+      const content = routes[path] || routes["/"];
+      const app = document.getElementById("app");
+      app.style.opacity = 0;
+      setTimeout(() => {
+        app.innerHTML = content;
+        app.style.opacity = 1;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        animateCounters();
+      }, 300);
+    };
+
+    // --- Animate counters on Home ---
+    const animateCounters = () => {
+      const counters = document.querySelectorAll(".count");
+      counters.forEach(counter => {
+        const update = () => {
+          const target = +counter.getAttribute("data-target");
+          const current = +counter.innerText;
+          const increment = target / 80;
+          if (current < target) {
+            counter.innerText = Math.ceil(current + increment);
+            setTimeout(update, 30);
+          } else {
+            counter.innerText = target;
+          }
+        };
+        update();
+      });
+    };
+
+    window.addEventListener("popstate", router);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.addEventListener("click", e => {
+        if (e.target.matches("[data-link]")) {
+          e.preventDefault();
+          navigateTo(e.target.getAttribute("href"));
+        }
+      });
+      router();
+    });
+  </script>
+</body>
+</html>
